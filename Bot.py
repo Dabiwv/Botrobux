@@ -40,11 +40,21 @@ def handle_text(message):
 def handle_buy(call):
     package = call.data.split('_')[1]
     price = robux_packages[package]
+    
+    # Формирование сообщения с вариантами оплаты
+    payment_msg = "Выберите метод оплаты:\n\n"
+    payment_msg += "1) Телеграм кошелек - UQC8Y2ZLGUJSmAasHTw_VNvO5jQ4w4OeJC_DQBO-wnqUItAL\n\n"
+    payment_msg += "2) Каспи банк - 📩 Отправьте деньги по реквизитам на Kaspi Gold 🔥:\n"
+    payment_msg += "☎️ Номер: 4400 4302 6934 6638\n"
+    payment_msg += "👨‍💻 Имя - Данил Г.\n"
+    payment_msg += "💬 Комментарий: НЕ ПИСАТЬ!!!\n\n"
+    payment_msg += "3) СБП - Оплатить можно на карту РОССИИ: 2200701089399395 Аким. После оплаты свяжитесь с автором данного бота @doksformoney для дальнейших переговоров"
+    
     markup = types.InlineKeyboardMarkup()
     btn1 = types.InlineKeyboardButton(text='Оплатить', url=f'https://example.com/pay?package={package}&price={price:.2f}')
     btn2 = types.InlineKeyboardButton(text='Отмена', callback_data='cancel')
     markup.add(btn1, btn2)
-    bot.send_message(chat_id=call.message.chat.id, text=f'Вы выбрали пакет {package} за {price:.2f} ₽. Нажмите "Оплатить", чтобы завершить покупку.', reply_markup=markup)
+    bot.send_message(chat_id=call.message.chat.id, text=payment_msg, reply_markup=markup)
 
 # Функция, которая обрабатывает нажатие на кнопку "Отмена"
 @bot.callback_query_handler(func=lambda call: call.data == 'cancel')
