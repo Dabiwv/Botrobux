@@ -9,7 +9,7 @@ TOKEN = "6702141092:AAFfXtlkW4U8fPT3VnBJMZToHP4GKjpwc2c"
 # SMTP настройки
 smtp_server = 'smtp.gmail.com'
 smtp_port = 587
-smtp_user = 'Makarkoh39@gmail.com'
+smtp_user = 'Makarkoh53@gmail.com'
 smtp_password = '09) 09) 09)'
 
 # Кнопки на клавиатуре
