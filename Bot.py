@@ -1,27 +1,19 @@
 import telebot
+import random
 
 # Токен бота
-TOKEN = '6699047318:AAGRIzgJy2LuPJWW59O0QsiuDCfZ20xxHws'
+TOKEN = '6732720595:AAFePTUr9fb4678Avx4Y74ViuSBJQQ8mACM'
 bot = telebot.TeleBot(TOKEN)
 
-# Ваш Telegram ID
-ADMIN_ID = 1694921116
+# Функция для генерации случайного количества раз в сети
+def get_online_count():
+    return random.randint(5, 100)  # Случайное число для развлечения
 
-# Обработчик команды /start, срабатывающий при новом пользователе
-@bot.message_handler(commands=['start'])
-def welcome_new_user(message):
-    user_id = message.from_user.id
-    username = message.from_user.username
-
-    if username:
-        user_info = f"Новый пользователь: @{username}"
-    else:
-        user_info = f"Новый пользователь: ID {user_id}"
-
-    # Отправляем информацию администратору
-    bot.send_message(ADMIN_ID, user_info)
-    # Приветствие нового пользователя
-    bot.send_message(message.chat.id, "Добро пожаловать! Спасибо за использование нашего бота.")
+# Обработчик команды /online
+@bot.message_handler(commands=['online'])
+def check_online(message):
+    online_count = get_online_count()
+    bot.send_message(message.chat.id, f"Ты был в сети {online_count} раз за последние 7 дней.")
 
 # Запуск бота
 bot.polling()
